@@ -1,5 +1,7 @@
 import re
 
+# [^A-Za-zÅåÄäÖö.,-]
+
 def diversiness(string, len_gain=0.2):
     used_chars = {}
     for i in string:
@@ -22,5 +24,11 @@ def patterns(string):
             patterns += 1
     return patterns
 
+def amountOfPunctuationCharacters(string):
+    pattern = r'[^A-Za-zÅåÄäÖö0-9 ]'
+    print(re.findall(pattern, string))
+    return len(re.findall(pattern, string)) / len(string)
+
 print(diversiness('asdasdasdasdasdasdasdasdasdasdasd'))
 print(patterns(input()))
+print(amountOfPunctuationCharacters(input()))
