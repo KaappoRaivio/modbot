@@ -1,6 +1,5 @@
 import re
 
-# [^A-Za-zÅåÄäÖö.,-]
 
 def diversiness(string, len_gain=0.2):
     used_chars = {}
@@ -10,6 +9,7 @@ def diversiness(string, len_gain=0.2):
         else:
             used_chars[i] += 1
     return len(used_chars) ** 1.75 / len(string) / 4
+
 
 def patterns(string):
     length = len(string) // 5
@@ -23,6 +23,7 @@ def patterns(string):
         if amount_of_patterns > 1:
             patterns += 1
     return patterns
+
 
 def amountOfPunctuationCharacters(string):
     pattern = r'[^A-Za-zÅåÄäÖö0-9 ]'
