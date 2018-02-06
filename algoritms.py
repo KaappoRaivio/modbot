@@ -1,35 +1,39 @@
-import re
+import re, inspect
 
 
-def diversiness(string, len_gain=0.2):
-    used_chars = {}
-    for i in string:
-        if i not in used_chars:
-            used_chars[i] = 1
-        else:
-            used_chars[i] += 1
-    return len(used_chars) ** 1.75 / len(string) / 4
+class Viesti(object):
+    def __init__(self, string):
+        self.string = string
+        self.length = len(string)
+        self.methods = inspect.getmembers(self, predicate=inspect.ismethod)
 
+    def diversiness(self, len_gain=0.2):
+        used_chars = {}
+        for i in self.string:
+            if i not in used_chars:
+                used_chars[i] = 1
+            else:
+                used_chars[i] += 1
+        return len(used_chars) ** 1.75 / self.length / 4
 
-def patterns(string):
-    length = len(string) // 5
-    patterns = 0
-    for i in range(len(string)):
-        try:
-            pattern = r'{}'.format(string[i:i + length])
-        except KeyError:
-            break
-        amount_of_patterns = len(re.findall(pattern, string))
-        if amount_of_patterns > 1:
-            patterns += 1
-    return patterns
+    def patterns(self):
+        pattern_length = self.length // 5
+        patterns = 0
+        for i in range(self.length):
+            try:
+                pattern = r'{}'.format(self.string[i:i + pattern_length])
+            except KeyError:
+                break
+            amount_of_patterns = len(re.findall(pattern, self.string))
+            if amount_of_patterns > 1:
+                patterns += 1
+        return patterns
 
+    def amountOfPunctuationCharacters(self):
+        pattern = r'[^A-Za-zÅåÄäÖö0-9 ]'
+        print(re.findall(pattern, self.string))
+        return len(re.findall(pattern, self.string)) / self.length
 
-def amountOfPunctuationCharacters(string):
-    pattern = r'[^A-Za-zÅåÄäÖö0-9 ]'
-    print(re.findall(pattern, string))
-    return len(re.findall(pattern, string)) / len(string)
-
-print(diversiness('asdasdasdasdasdasdasdasdasdasdasd'))
-print(patterns(input()))
-print(amountOfPunctuationCharacters(input()))
+viesti = Viesti(input())
+print(viesti.methods)
+print
