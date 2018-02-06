@@ -1,4 +1,5 @@
-import re, inspect
+import re
+import inspect
 
 
 class Viesti(object):
@@ -35,6 +36,6 @@ class Viesti(object):
 
 viesti = Viesti(input())
 
-for i in range(len(viesti.methods)): # Iteroidaan luokan Viesti metodeissa.
+for i in range(len(viesti.methods)):  # Iteroidaan luokan "Viesti" metodeissa.
     if viesti.methods[i][0] is not '__init__':
         print(viesti.methods[i][1]())
