@@ -31,9 +31,10 @@ class Viesti(object):
 
     def amountOfPunctuationCharacters(self):
         pattern = r'[^A-Za-zÅåÄäÖö0-9 ]'
-        print(re.findall(pattern, self.string))
         return len(re.findall(pattern, self.string)) / self.length
 
 viesti = Viesti(input())
-print(viesti.methods)
-print
+
+for i in range(len(viesti.methods)): # Iteroidaan luokan Viesti metodeissa.
+    if viesti.methods[i][0] is not '__init__':
+        print(viesti.methods[i][1]())
